@@ -1,4 +1,6 @@
-# mother project : kakaoBot<br>
-최근 수정: 2018/12/01<br>
-추가기능 : 파파고 api를 이용한 카카오톡에서 전송한 사진 속 글자 인식및 번역
-
+# Introduction
+This repository is for CSE223-00 **OpenSource SW** 2019 Fall Term Project.  <br>
+Our team members are 2016102001 *Hansol Choi* and 2018104830 *Dongjoo Yoon*.  <Br>
+The topic of this project is **HoneySleepBot**. <br>
+# Mother Project : <a href="http://khuhub.khu.ac.kr/2019-01-OpenSourceSW/LINEBOT">LINEBOT</a>
+## Last Updated : 12.01, 2019
