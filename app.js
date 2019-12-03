@@ -34,7 +34,7 @@ function handleEvent(event) {
     }
     return new Promise(function (resolve, reject) {
         //내가 짠 것
-        function getup(shour, smin, ampm) {//몇시에 자려고 할때 언제 일어나면 좋을지
+        function getup(shour, smin, ampm) {//몇시에 자려고 할 때 언제 일어나면 좋을지
             if (shour != '(hour)' && smin != '(minute)') {
                 ; //탈출
                 var setTime = new Date();
@@ -107,7 +107,7 @@ function handleEvent(event) {
 })};
 
 
-function sleep(ghour, gmin, ampm) {
+function sleep(ghour, gmin, ampm) { //몇시에 일어나려고 할 때 언제 자면 좋을지
     //$('#start').hide();
     var zDate = new Date();
 
