@@ -52,10 +52,10 @@ function handleEvent(event) {
 
             setTime.setMinutes(smin);
 
-            var res1 = new Date(setTime.getTime() - 270 * 60000);
-            var res2 = new Date(res1.getTime() - 90 * 60000);
-            var res3 = new Date(res2.getTime() - 90 * 60000);
-            var res4 = new Date(res3.getTime() - 90 * 60000);
+            var gres1 = new Date(setTime.getTime() - 270 * 60000);
+            var gres2 = new Date(res1.getTime() - 90 * 60000);
+            var gres3 = new Date(res2.getTime() - 90 * 60000);
+            var gres4 = new Date(res3.getTime() - 90 * 60000);
 
             function retDate(dateObj) {
                 var formatted = '';
@@ -91,10 +91,10 @@ function handleEvent(event) {
                 return formatted;
             }
 
-            console.log(String(retDate(res1)));
-            console.log(String(retDate(res2)));
-            console.log(String(retDate(res3)));
-            console.log(String(retDate(res4)));
+            console.log(String(retDate(gres1)));
+            console.log(String(retDate(gres2)));
+            console.log(String(retDate(gres3)));
+            console.log(String(retDate(gres4)));
 
             $('#results').fadeIn();
             $('#feedback').fadeIn();
@@ -111,12 +111,12 @@ function sleep(ghour, gmin, ampm) { //몇시에 일어나려고 할 때 언제 �
     //$('#start').hide();
     var zDate = new Date();
 
-    var res1 = new Date(zDate.getTime() + 104*60000);
-    var res2 = new Date(res1.getTime() + 90*60000);
-    var res3 = new Date(res2.getTime() + 90*60000);
-    var res4 = new Date(res3.getTime() + 90*60000);
-    var res5 = new Date(res4.getTime() + 90*60000);
-    var res6 = new Date(res5.getTime() + 90*60000);
+    var sres1 = new Date(zDate.getTime() + 104*60000);
+    var sres2 = new Date(res1.getTime() + 90*60000);
+    var sres3 = new Date(res2.getTime() + 90*60000);
+    var sres4 = new Date(res3.getTime() + 90*60000);
+    var sres5 = new Date(res4.getTime() + 90*60000);
+    var sres6 = new Date(res5.getTime() + 90*60000);
 
     function retDate(dateObj) {
         var formatted = '';
@@ -145,17 +145,53 @@ function sleep(ghour, gmin, ampm) { //몇시에 일어나려고 할 때 언제 �
         return formatted;
     }
 
-    console.log(String(retDate(res1)));
-    console.log(String(retDate(res2)));
-    console.log(String(retDate(res3)));
-    console.log(String(retDate(res4)));
-    console.log(String(retDate(res5)));
-    console.log(String(retDate(res6)));
+    console.log(String(retDate(sres1)));
+    console.log(String(retDate(sres2)));
+    console.log(String(retDate(sres3)));
+    console.log(String(retDate(sres4)));
+    console.log(String(retDate(sres5)));
+    console.log(String(retDate(sres6)));
 
     $('#resultsNow').fadeIn();
     $('#feedback').fadeIn();
     $('#ad').fadeIn();
 };
+//sleep 함수
+console.log("You should try to fall asleep at one of the following times: ");
+"sres1"  title="Six Cycles: Nine Hours of Sleep"
+or
+"sres2"  title="Five Cycles: Seven and a half Hours of Sleep"
+or
+"sres3" title="Four Cycles: Six Hours of Sleep"
+or
+"sres4" title="Three Cycles: Four and a half Hours of Sleep">
+
+console.log("Please keep in mind that you should be falling asleep at these times.");
+console.log("The average human takes fourteen minutes to fall asleep, so plan accordingly!");
+
+console.log("꿀잠봇 works by counting backwards in sleep cycles.");
+console.log("Waking up in the middle of a sleep cycle leaves you feeling tired and groggy, but waking up in between cycles wakes you up feeling refreshed and alert!");
+console.log("A good night's sleep consists of 5-6 complete sleep cycles.");
+//getup 함수
+console.log("If you head to bed right now, you should try to wake up at one of the following times:");
+"gres1" title="One Cycle: One and a half Hours of Sleep"
+or
+"gres2" title="Two Cycles: Three Hours of Sleep"
+or
+"gres3" title="Three Cycles: Four and a half Hours of Sleep"
+or
+"gres4" title="Four Cycles: Six Hours of Sleep"
+or
+"gres5" title="Five Cycles: Seven and a half Hours of Sleep"
+or
+"gres6" title="Six Cycles: Nine Hours of Sleep"
+
+console.log("Please keep in mind that you should try to wake up at one of these times.");
+console.log("The average human takes fourteen minutes to fall asleep, so plan accordingly!");
+
+console.log("꿀잠봇 works by counting backwards in sleep cycles.");
+console.log("Waking up in the middle of a sleep cycle leaves you feeling tired and groggy, but waking up in between cycles wakes you up feeling refreshed and alert!");
+console.log("A good night's sleep consists of 5-6 complete sleep cycles.");
 /*
     //언어 감지 option
     var detect_options = {
