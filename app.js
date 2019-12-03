@@ -16,7 +16,7 @@ const client = new line.Client(config);
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-app.post('/webhook', line.middleware(config), (req, res) => {
+app.post('https://bots.dialogflow.com/line/d1584d25-0e52-48da-b6cc-20e021dc5e70/webhook', line.middleware(config), (req, res) => {
   Promise
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
@@ -63,13 +63,13 @@ function handleEvent(event) {
                 if (dateObj.getHours() > 12) {
                     formatted = dateObj.getHours() - 12;
                     pm = true;
-                } 
+                }
                 else if (dateObj.getHours() < 12 && dateObj.getHours() != 0) {
                     formatted = dateObj.getHours();
-                } 
+                }
                 else if (dateObj.getHours() == 0) {
                     formatted = "12";
-                } 
+                }
                 else if (dateObj.getHours() == 12) {
                     formatted = "12";
                     pm = true;
@@ -77,14 +77,14 @@ function handleEvent(event) {
 
                 if (dateObj.getMinutes() < 10) {
                     formatted = formatted + ":0" + dateObj.getMinutes();
-                } 
+                }
                 else {
                     formatted = formatted + ":" + dateObj.getMinutes();
                 }
 
                 if (pm == true) {
                     formatted = formatted + " PM";
-                } 
+                }
                 else {
                     formatted = formatted + " AM";
                 }
@@ -151,7 +151,7 @@ function sleep(ghour, gmin, ampm) { //몇시에 일어나려고 할 때 언제 �
     console.log(String(retDate(res4)));
     console.log(String(retDate(res5)));
     console.log(String(retDate(res6)));
-			
+
     $('#resultsNow').fadeIn();
     $('#feedback').fadeIn();
     $('#ad').fadeIn();
@@ -215,7 +215,7 @@ function sleep(ghour, gmin, ampm) { //몇시에 일어나려고 할 때 언제 �
 
     });
 */
-  
+
 
 app.listen(3000, function () {
   console.log('Linebot listening on port 3000!');
