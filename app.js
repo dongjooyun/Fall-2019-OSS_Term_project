@@ -2,21 +2,6 @@ var express = require('express');
 var app = express();
 const line = require('@line/bot-sdk');
 
-
-//papago api
-var request = require('request');
-
-//번역 api_url
-var translate_api_url = 'https://openapi.naver.com/v1/papago/n2mt';
-
-//언어감지 api_url
-var languagedetect_api_url = 'https://openapi.naver.com/v1/papago/detectLangs'
-
-// Naver Auth Key
-//새로 발급받은 naver papago api id, pw 입력
-var client_id = 'xZMx34y7uru1v8lywZ2d';
-var client_secret = 'p6L7M7WsH9';
-
 const config = {
   channelAccessToken: 'L+RJ15lZgeSoWgeHf9BqgEhm8lYh11qALzPlDV85VGXHfmiKqj3CX1V9DvqakFeJqwWgfQRejsUIWqf/kJuTLQcRC5ws2pyJJbr0VFEXptoYicgiRDzuA51W91dTcFL6/olvLNS1zAf1xO2wxpTGvQdB04t89/1O/w1cDnyilFU=',
   channelSecret: 'e8e139b4cf31d22ed234d62a9b336e74',
@@ -43,11 +28,136 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 
 // event handler
 function handleEvent(event) {
-  if (event.type !== 'message' || event.message.type !== 'text') {
-    // ignore non-text-message event
-    return Promise.resolve(null);
-  }
-  return new Promise(function(resolve, reject) {
+    if (event.type !== 'message' || event.message.type !== 'text') {
+        // ignore non-text-message event
+        return Promise.resolve(null);
+    }
+    return new Promise(function (resolve, reject) {
+        //내가 짠 것
+        function getup(shour, smin, ampm) {//몇시에 자려고 할때 언제 일어나면 좋을지
+            if (shour != '(hour)' && smin != '(minute)') {
+                ; //탈출
+                var setTime = new Date();
+
+            if (shour == 12) {
+                shour = 0;
+            }
+
+            if (ampm == "AM") {
+                setTime.setHours(shour);
+            }
+            else if (ampm == "PM") {
+                setTime.setHours(shour + 12);
+            }
+
+            setTime.setMinutes(smin);
+
+            var res1 = new Date(setTime.getTime() - 270 * 60000);
+            var res2 = new Date(res1.getTime() - 90 * 60000);
+            var res3 = new Date(res2.getTime() - 90 * 60000);
+            var res4 = new Date(res3.getTime() - 90 * 60000);
+
+            function retDate(dateObj) {
+                var formatted = '';
+                var pm = false;
+                if (dateObj.getHours() > 12) {
+                    formatted = dateObj.getHours() - 12;
+                    pm = true;
+                } 
+                else if (dateObj.getHours() < 12 && dateObj.getHours() != 0) {
+                    formatted = dateObj.getHours();
+                } 
+                else if (dateObj.getHours() == 0) {
+                    formatted = "12";
+                } 
+                else if (dateObj.getHours() == 12) {
+                    formatted = "12";
+                    pm = true;
+                }
+
+                if (dateObj.getMinutes() < 10) {
+                    formatted = formatted + ":0" + dateObj.getMinutes();
+                } 
+                else {
+                    formatted = formatted + ":" + dateObj.getMinutes();
+                }
+
+                if (pm == true) {
+                    formatted = formatted + " PM";
+                } 
+                else {
+                    formatted = formatted + " AM";
+                }
+                return formatted;
+            }
+
+            console.log(String(retDate(res1)));
+            console.log(String(retDate(res2)));
+            console.log(String(retDate(res3)));
+            console.log(String(retDate(res4)));
+
+            $('#results').fadeIn();
+            $('#feedback').fadeIn();
+            $('#ad').fadeIn();
+        } // end hour/minute check if
+        else {
+            alert("Please select an hour and a minute before trying to calculate!");
+        } // end not-filled check
+    };// end calculate
+})};
+
+
+function sleep(ghour, gmin, ampm) {
+    //$('#start').hide();
+    var zDate = new Date();
+
+    var res1 = new Date(zDate.getTime() + 104*60000);
+    var res2 = new Date(res1.getTime() + 90*60000);
+    var res3 = new Date(res2.getTime() + 90*60000);
+    var res4 = new Date(res3.getTime() + 90*60000);
+    var res5 = new Date(res4.getTime() + 90*60000);
+    var res6 = new Date(res5.getTime() + 90*60000);
+
+    function retDate(dateObj) {
+        var formatted = '';
+        var pm = false;
+        if(dateObj.getHours() > 12) {
+            formatted = dateObj.getHours() - 12;
+            pm = true;
+        } else if(dateObj.getHours() < 12 && dateObj.getHours() != 0) {
+            formatted = dateObj.getHours();
+        } else if(dateObj.getHours() == 0) {
+            formatted = "12";
+        } else if(dateObj.getHours() == 12) {
+            formatted = "12";
+            pm = true;
+        }
+        if(dateObj.getMinutes() < 10) {
+            formatted = formatted + ":0" + dateObj.getMinutes();
+        } else {
+            formatted = formatted + ":" + dateObj.getMinutes();
+        }
+        if(pm == true) {
+            formatted = formatted + " PM";
+        } else {
+            formatted = formatted + " AM";
+        }
+        return formatted;
+    }
+
+    console.log(String(retDate(res1)));
+    console.log(String(retDate(res2)));
+    console.log(String(retDate(res3)));
+    console.log(String(retDate(res4)));
+    console.log(String(retDate(res5)));
+    console.log(String(retDate(res6)));
+			
+    $('#resultsNow').fadeIn();
+    $('#feedback').fadeIn();
+    $('#ad').fadeIn();
+});
+});
+/*
     //언어 감지 option
     var detect_options = {
       url : languagedetect_api_url,
@@ -104,9 +214,8 @@ function handleEvent(event) {
       }
 
     });
-
-    });
-  }
+*/
+  
 
 app.listen(3000, function () {
   console.log('Linebot listening on port 3000!');
