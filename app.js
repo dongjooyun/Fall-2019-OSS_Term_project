@@ -18,8 +18,8 @@ var client_id = 'xZMx34y7uru1v8lywZ2d';
 var client_secret = 'p6L7M7WsH9';
 
 const config = {
-  channelAccessToken: 'mnny0MJSezgBXzR9C3Ddcc1Csdb7Y9jkvy2nqV5saOmvR2YOJ1/kj/2M0CNsLA+57B2qDpdUQ7WbCTtIKx/LAJ6Kwfop4tX3up7EM8H9EZK1td6GMbhhCb6wvUFVdb1PcTO4joCv8mspd3ubo8a+gAdB04t89/1O/w1cDnyilFU=',
-  channelSecret: 'bde77633a16fc5bfbd532d5990c6170e',
+  channelAccessToken: 'L+RJ15lZgeSoWgeHf9BqgEhm8lYh11qALzPlDV85VGXHfmiKqj3CX1V9DvqakFeJqwWgfQRejsUIWqf/kJuTLQcRC5ws2pyJJbr0VFEXptoYicgiRDzuA51W91dTcFL6/olvLNS1zAf1xO2wxpTGvQdB04t89/1O/w1cDnyilFU=',
+  channelSecret: 'e8e139b4cf31d22ed234d62a9b336e74',
 };
 
 
