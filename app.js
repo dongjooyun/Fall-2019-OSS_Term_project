@@ -155,8 +155,7 @@ function sleep(ghour, gmin, ampm) { //몇시에 일어나려고 할 때 언제 �
     $('#resultsNow').fadeIn();
     $('#feedback').fadeIn();
     $('#ad').fadeIn();
-});
-});
+};
 /*
     //언어 감지 option
     var detect_options = {
