@@ -16,11 +16,11 @@ const client = new line.Client(config);
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-app.post('https://bots.dialogflow.com/line/d1584d25-0e52-48da-b6cc-20e021dc5e70/webhook', line.middleware(config), (req, res) => {
+app.post('https://mylinebottest1.herokuapp.com/callback', line.middleware(config), (req, res) => {
   Promise
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
-    .catch((err) => {
+    .catch((err) => { //error handling
       console.error(err);
       res.status(200).end();
     });
@@ -36,7 +36,7 @@ function handleEvent(event) {
         //내가 짠 것
         function getup(shour, smin, ampm) {//몇시에 자려고 할 때 언제 일어나면 좋을지
             if (shour != '(hour)' && smin != '(minute)') {
-                ; //탈출
+                //; //탈출
                 var setTime = new Date();
 
             if (shour == 12) {
@@ -156,6 +156,7 @@ function sleep(ghour, gmin, ampm) { //몇시에 일어나려고 할 때 언제 �
     $('#feedback').fadeIn();
     $('#ad').fadeIn();
 };
+/*
 //sleep 함수
 console.log("You should try to fall asleep at one of the following times: ");
 "sres1"  title="Six Cycles: Nine Hours of Sleep"
@@ -192,6 +193,8 @@ console.log("The average human takes fourteen minutes to fall asleep, so plan ac
 console.log("꿀잠봇 works by counting backwards in sleep cycles.");
 console.log("Waking up in the middle of a sleep cycle leaves you feeling tired and groggy, but waking up in between cycles wakes you up feeling refreshed and alert!");
 console.log("A good night's sleep consists of 5-6 complete sleep cycles.");
+*/
+
 /*
     //언어 감지 option
     var detect_options = {
