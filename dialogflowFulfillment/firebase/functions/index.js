@@ -36,8 +36,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     const min = agent.parameters.minutes;
     const gothour = hour.length > 0;
     const gotmin = min.length > 0;
-    const rehour = (hour)+3;
-    const remin = min+10;
+    const rehour = Number(hour)+3;
+    const remin = Number(min)+10;
 
     if(gothour && gotmin) {
         agent.add(`좋습니다. 당신의 취침시간은 ${hour}시 ${min}분 입니다.`);
