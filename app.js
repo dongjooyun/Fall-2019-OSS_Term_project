@@ -1,3 +1,32 @@
+const express = require('express');
+const line = require('@line/bot-sdk');
+
+const config = {
+  channelAccessToken: 'L+RJ15lZgeSoWgeHf9BqgEhm8lYh11qALzPlDV85VGXHfmiKqj3CX1V9DvqakFeJqwWgfQRejsUIWqf/kJuTLQcRC5ws2pyJJbr0VFEXptoYicgiRDzuA51W91dTcFL6/olvLNS1zAf1xO2wxpTGvQdB04t89/1O/w1cDnyilFU=',
+  channelSecret: 'e8e139b4cf31d22ed234d62a9b336e74'
+};
+
+const app = express();
+app.post('/webhook', line.middleware(config), (req, res) => {
+  Promise
+    .all(req.body.events.map(handleEvent))
+    .then((result) => res.json(result));
+});
+
+const client = new line.Client(config);
+function handleEvent(event) {
+  if (event.type !== 'message' || event.message.type !== 'text') {
+    return Promise.resolve(null);
+  }
+
+  return client.replyMessage(event.replyToken, {
+    type: 'text',
+    text: event.message.text
+  });
+}
+
+app.listen(3000);
+/*
 var express = require('express');
 var app = express();
 const line = require('@line/bot-sdk');
@@ -156,6 +185,7 @@ function sleep(ghour, gmin, ampm) { //몇시에 일어나려고 할 때 언제 �
     $('#feedback').fadeIn();
     $('#ad').fadeIn();
 };
+*/
 /*
 //sleep 함수
 console.log("You should try to fall asleep at one of the following times: ");
