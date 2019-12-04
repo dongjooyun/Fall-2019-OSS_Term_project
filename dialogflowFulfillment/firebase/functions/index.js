@@ -27,7 +27,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 취침시간 입력 예시 :  취침 22:30 또는 기상 22시30분 \n`);
   }
 
-  //기상시간 입력 및 추천 cycle 반환
+  //기상시간 입력의 경우
   function mytime1(agent) {
     const hour = agent.parameters['number-integer'];
     const min = agent.parameters['number-integer1'];
@@ -97,6 +97,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     }
   }
 
+
+//취침시간 입력의 경우
 function mytime2(agent) {
    const hour = agent.parameters['number-integer'];
     const min = agent.parameters['number-integer1'];
@@ -126,9 +128,9 @@ function mytime2(agent) {
       if(myhour4>=24){myhour4=myhour4-24;}
 
       if(mymin1>=60){mymin1=mymin1-60;}
-      if(mymin2>=60){mymin1=mymin2-60;}
-      if(mymin3>=60){mymin1=mymin3-60;}
-      if(mymin4>=60){mymin1=mymin4-60;}
+      if(mymin2>=60){mymin2=mymin2-60;}
+      if(mymin3>=60){mymin3=mymin3-60;}
+      if(mymin4>=60){mymin4=mymin4-60;}
 
     }else if(min+30>60){
       myhour1 = Number(hour)+2;
@@ -151,9 +153,9 @@ function mytime2(agent) {
       if(myhour4>=24){myhour4=myhour4-24;}
 
       if(mymin1>=60){mymin1=mymin1-60;}
-      if(mymin2>=60){mymin1=mymin2-60;}
-      if(mymin3>=60){mymin1=mymin3-60;}
-      if(mymin4>=60){mymin1=mymin4-60;}
+      if(mymin2>=60){mymin2=mymin2-60;}
+      if(mymin3>=60){mymin3=mymin3-60;}
+      if(mymin4>=60){mymin4=mymin4-60;}
     }
 
     if(gothour && gotmin && sethour && setmin) {
@@ -171,7 +173,7 @@ function mytime2(agent) {
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', fallback);
   intentMap.set('Default Fallback Intent', fallback);
-  intentMap.set('time1',mytime1);//기상시간 기준
-  intentMap.set('time2',mytime2);//취침시간 기준
+  intentMap.set('time1',mytime1);//기상시간 입력기준
+  intentMap.set('time2',mytime2);//취침시간 입력기준
   agent.handleRequest(intentMap);
 });
