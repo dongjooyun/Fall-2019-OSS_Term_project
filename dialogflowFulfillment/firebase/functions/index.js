@@ -23,31 +23,89 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
   var mytime;
   function test1(agent){
-    agent.setContext();
-    const mytime = agent.parameters.hours;
-    const myresult = mytime+12;
-    if(mytime>0){
-      agent.add(`Good. your sleep time is ${myresult}`);
-    }
+    agent.add(new Card({
+         title: `Title: this is a card title`,
+         imageUrl: 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
+         text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
+         buttonText: 'This is a button',
+         buttonUrl: 'https://assistant.google.com/'
+      }));
   }
 
+  //기상시간 입력 및 추천 cycle 반환
   function test2(agent) {
     const hour = agent.parameters.hours;
     const min = agent.parameters.minutes;
     const gothour = hour.length > 0;
     const gotmin = min.length > 0;
-    const rehour = Number(hour)+3;
-    const remin = Number(min)+10;
+    var myhour1,myhour2,myhour3,myhour4;
+    var mymin1,mymin2,mymin3,mymin4;
+
+    if(Number(min)-30>0){
+      const rehour1 = Number(hour)-9;
+      const remin1 = Number(min);
+
+      const rehour2 = Number(hour)-7;
+      const remin2 = Number(min)-30;
+
+      const rehour3 = Number(hour)-6;
+      const remin3 = Number(min);
+
+      const rehour4 = Number(hour)-4;
+      const remin4 = Number(min)-30;
+
+      myhour1=rehour1; myhour2=rehour2; myhour3=rehour3; myhour4=rehour4;
+
+      //시간이 -값이 될때 값 설정
+      if(myhour1<0){myhour1=24+myhour1;}
+      if(myhour2<0){myhour2=24+myhour2;}
+      if(myhour3<0){myhour3=24+myhour3;}
+      if(myhour4<0){myhour4=24+myhour4;}
+
+      if(mymin1<0){mymin1=60+mymin1;}
+      if(mymin2<0){mymin1=60+mymin2;}
+      if(mymin3<0){mymin1=60+mymin3;}
+      if(mymin4<0){mymin1=60+mymin4;}
+
+    }else if(Number(min)-30<0){
+      const rehour1 = Number(hour)-9;
+      const remin1 = Number(min);
+
+      const rehour2 = Number(hour)-8;
+      const remin2 = Number(min)+30;
+
+      const rehour3 = Number(hour)-6;
+      const remin3 = Number(min);
+
+      const rehour4 = Number(hour)-5;
+      const remin4 = Number(min)+30;
+
+      myhour1=rehour1; myhour2=rehour2; myhour3=rehour3; myhour4=rehour4;
+
+      //시간이 -값이 될때 값 설정
+      if(myhour1<0){myhour1=24+myhour1;}
+      if(myhour2<0){myhour2=24+myhour2;}
+      if(myhour3<0){myhour3=24+myhour3;}
+      if(myhour4<0){myhour4=24+myhour4;}
+
+      if(mymin1<0){mymin1=60+mymin1;}
+      if(mymin2<0){mymin1=60+mymin2;}
+      if(mymin3<0){mymin1=60+mymin3;}
+      if(mymin4<0){mymin1=60+mymin4;}
+
+    }
 
     if(gothour && gotmin) {
-        agent.add(`좋습니다. 당신의 취침시간은 ${hour}시 ${min}분 입니다.`);
-      	agent.add(`${rehour}시  ${remin}분에 주무십시오`);
+        agent.add(`좋습니다. 당신의 기상시간은 ${hour}시 ${min}분 입니다.`);
+      	agent.add(`기상시간을 참고한 결과 총 4개의 권장 취침 시간이 있습니다. ${myhour1}시  ${myhour1}분(6cycle) / ${myhour2}시  ${myhour2}분(5cycle) / ${myhour3}시  ${myhour3}분(4cycle) / ${myhour4}시  ${myhour4}(3cycle)분 중 원하는 시간에 주무시길 추천드립니다.'\n'`);
+
+
     } else if (gothour && !gotmin) {
-        agent.add('시간이 잘못 입력되었습니다.');
+        agent.add('기상시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
     } else if (gothour && !gothour) {
-        agent.add('시간이 잘못 입력되었습니다.');
+        agent.add('기상시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
     } else {
-        agent.add('취침시간을 00:00 또는 00시00분 으로 입력해 주세요');
+        agent.add('기상시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
     }
   }
   // // Uncomment and edit to make your own intent handler
@@ -83,6 +141,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
-  intentMap.set('test',test2);
+  intentMap.set('time',test2);
+  intentMap.set('result',mytime);
   agent.handleRequest(intentMap);
 });
