@@ -23,27 +23,26 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
   //기상시간 입력 및 추천 cycle 반환
   function mytime1(agent) {
-    const hour = agent.parameters.hours;
-    const min = agent.parameters.minutes;
-    const gothour = hour.length > 0;
-    const gotmin = min.length > 0;
-    var myhour1,myhour2,myhour3,myhour4;
-    var mymin1,mymin2,mymin3,mymin4;
+    const hour = agent.parameters['number-integer'];
+    const min = agent.parameters['number-integer1'];
+    const gothour = String(hour).length > 0;
+    const gotmin = String(min).length > 0;
+    const sethour = 0<=hour && hour<=24;
+    const setmin = 0<=min && min<=59;
+    var myhour1,myhour2, myhour3,myhour4,mymin1,mymin2,mymin3,mymin4;
 
-    if(Number(min)-30>0){
-      const rehour1 = Number(hour)-9;
-      const remin1 = Number(min);
+    if(min-30>0){
+      myhour1 = Number(hour)-9;
+      mymin1 = Number(min);
 
-      const rehour2 = Number(hour)-7;
-      const remin2 = Number(min)-30;
+      myhour2 = Number(hour)-7;
+      mymin2 = Number(min)-30;
 
-      const rehour3 = Number(hour)-6;
-      const remin3 = Number(min);
+      myhour3 = Number(hour)-6;
+      mymin3 = Number(min);
 
-      const rehour4 = Number(hour)-4;
-      const remin4 = Number(min)-30;
-
-      myhour1=rehour1; myhour2=rehour2; myhour3=rehour3; myhour4=rehour4;
+      myhour4 = Number(hour)-4;
+      mymin4 = Number(min)-30;
 
       //시간이 -값이 될때 값 설정
       if(myhour1<0){myhour1=24+myhour1;}
@@ -57,19 +56,17 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
       if(mymin4<0){mymin1=60+mymin4;}
 
     }else if(Number(min)-30<0){
-      const rehour1 = Number(hour)-9;
-      const remin1 = Number(min);
+      myhour1 = Number(hour)-9;
+      mymin1 = Number(min);
 
-      const rehour2 = Number(hour)-8;
-      const remin2 = Number(min)+30;
+      myhour2 = Number(hour)-8;
+      mymin2 = Number(min)+30;
 
-      const rehour3 = Number(hour)-6;
-      const remin3 = Number(min);
+      myhour3 = Number(hour)-6;
+      mymin3 = Number(min);
 
-      const rehour4 = Number(hour)-5;
-      const remin4 = Number(min)+30;
-
-      myhour1=rehour1; myhour2=rehour2; myhour3=rehour3; myhour4=rehour4;
+      myhour4 = Number(hour)-5;
+      mymin4 = Number(min)+30;
 
       //시간이 -값이 될때 값 설정
       if(myhour1<0){myhour1=24+myhour1;}
@@ -81,96 +78,86 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
       if(mymin2<0){mymin1=60+mymin2;}
       if(mymin3<0){mymin1=60+mymin3;}
       if(mymin4<0){mymin1=60+mymin4;}
-
     }
 
-    if(gothour && gotmin) {
+    if(gothour && gotmin && sethour && setmin) {
         agent.add(`좋습니다. 당신의 기상시간은 ${hour}시 ${min}분 입니다.`);
       	agent.add(`한 번의 수면 cycle은 1시간 30분 (90분)입니다.\n 당신의 기상시간을 참고한 결과 총 4개의 권장 취침 시간(cycle)이 있습니다.\n 1. ${myhour1}시  ${myhour1}분(6cycle) \n 2. ${myhour2}시  ${myhour2}분(5cycle) \n 3. ${myhour3}시  ${myhour3}분(4cycle) \n 4. ${myhour4}시  ${myhour4}(3cycle)분 \n 원하는 시간에 주무시길 추천드립니다.`);
-
-
-    } else if (gothour && !gotmin) {
-        agent.add('기상시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
-    } else if (gothour && !gothour) {
-        agent.add('기상시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
+   		agent.add(`꿀잠 주무시길 바랄게요:)`);
     } else {
         agent.add('기상시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
     }
   }
 
 function mytime2(agent) {
-   const hour = agent.parameters.hours;
-   const min = agent.parameters.minutes;
-   const gothour = hour.length > 0;
-   const gotmin = min.length > 0;
-   var myhour1,myhour2,myhour3,myhour4;
-   var mymin1,mymin2,mymin3,mymin4;
+   const hour = agent.parameters['number-integer'];
+    const min = agent.parameters['number-integer1'];
+    const gothour = String(hour).length > 0;
+    const gotmin = String(min).length > 0;
+    const sethour = 0<=hour && hour<=24;
+    const setmin = 0<=min && min<=59;
+    var myhour1,myhour2, myhour3,myhour4,mymin1,mymin2,mymin3,mymin4;
 
-   if(Number(min)+30<60){
-     const rehour1 = Number(hour)+1;
-     const remin1 = Number(min)+30;
+    if(min+30<60){
+      myhour1 = Number(hour)+1;
+      mymin1 = Number(min)+30;
 
-     const rehour2 = Number(hour)+6;
-     const remin2 = Number(min);
+      myhour2 = Number(hour)+6;
+      mymin2 = Number(min);
 
-     const rehour3 = Number(hour)+7;
-     const remin3 = Number(min)+30;
+      myhour3 = Number(hour)+7;
+      mymin3 = Number(min)+30;
 
-     const rehour4 = Number(hour)+9;
-     const remin4 = Number(min);
-
-     myhour1=rehour1; myhour2=rehour2; myhour3=rehour3; myhour4=rehour4;
-
-      //시간이 -값이 될때 값 설정
-      if(myhour1<0){myhour1=24+myhour1;}
-      if(myhour2<0){myhour2=24+myhour2;}
-      if(myhour3<0){myhour3=24+myhour3;}
-      if(myhour4<0){myhour4=24+myhour4;}
-
-      if(mymin1<0){mymin1=60+mymin1;}
-      if(mymin2<0){mymin1=60+mymin2;}
-      if(mymin3<0){mymin1=60+mymin3;}
-      if(mymin4<0){mymin1=60+mymin4;}
-
-   }else if(Number(min)+30>60){
-     const rehour1 = Number(hour)+2;
-     const remin1 = Number(min)-30;
-
-     const rehour2 = Number(hour)+6;
-     const remin2 = Number(min);
-
-     const rehour3 = Number(hour)+8;
-     const remin3 = Number(min)-30;
-
-     const rehour4 = Number(hour)+9;
-     const remin4 = Number(min);
-
-     myhour1=rehour1; myhour2=rehour2; myhour3=rehour3; myhour4=rehour4;
+      myhour4 = Number(hour)+9;
+      mymin4 = Number(min);
 
       //시간이 -값이 될때 값 설정
-      if(myhour1<0){myhour1=24+myhour1;}
-      if(myhour2<0){myhour2=24+myhour2;}
-      if(myhour3<0){myhour3=24+myhour3;}
-      if(myhour4<0){myhour4=24+myhour4;}
+      if(myhour1>24){myhour1=myhour1-24;}
+      if(myhour2>24){myhour2=myhour2-24;}
+      if(myhour3>24){myhour3=myhour3-24;}
+      if(myhour4>24){myhour4=myhour4-24;}
 
-      if(mymin1<0){mymin1=60+mymin1;}
-      if(mymin2<0){mymin1=60+mymin2;}
-      if(mymin3<0){mymin1=60+mymin3;}
-      if(mymin4<0){mymin1=60+mymin4;}
-   }
+      if(mymin1>60){mymin1=mymin1-60;}
+      if(mymin2>60){mymin1=mymin2-60;}
+      if(mymin3>60){mymin1=mymin3-60;}
+      if(mymin4>60){mymin1=mymin4-60;}
 
-   if(gothour && gotmin) {
-     	agent.add(`좋습니다. 당신의 취침시간은 ${hour}시 ${min}분 입니다.`);
+    }else if(min+30>60){
+      myhour1 = Number(hour)+2;
+      mymin1 = Number(min)-30;
+
+      myhour2 = Number(hour)+6;
+      mymin2 = Number(min);
+
+      myhour3 = Number(hour)+8;
+      mymin3 = Number(min)-30;
+
+      myhour4 = Number(hour)+9;
+      mymin4 = Number(min);
+
+      //시간이 -값이 될때 값 설정
+     //시간이 -값이 될때 값 설정
+      if(myhour1>24){myhour1=myhour1-24;}
+      if(myhour2>24){myhour2=myhour2-24;}
+      if(myhour3>24){myhour3=myhour3-24;}
+      if(myhour4>24){myhour4=myhour4-24;}
+
+      if(mymin1>60){mymin1=mymin1-60;}
+      if(mymin2>60){mymin1=mymin2-60;}
+      if(mymin3>60){mymin1=mymin3-60;}
+      if(mymin4>60){mymin1=mymin4-60;}
+    }
+
+    if(gothour && gotmin && sethour && setmin) {
+        agent.add(`좋습니다. 당신의 취침시간은 ${hour}시 ${min}분 입니다.`);
       	agent.add(`한 번의 수면 cycle은 1시간 30분 (90분)입니다.\n 당신의 취침시간을 참고한 결과 총 4개의 권장 기상시간(cycle)이 있습니다.\n 1. ${myhour1}시  ${myhour1}분(6cycle) \n 2. ${myhour2}시  ${myhour2}분(5cycle) \n 3. ${myhour3}시  ${myhour3}분(4cycle) \n 4. ${myhour4}시  ${myhour4}(3cycle)분 \n 원하는 시간에 기상 하시길 추천드립니다.`);
+      	agent.add(`꿀잠 주무시길 바랄게요:)`);
+    } else {
+        agent.add('기상시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
+    }
+  }
 
-   } else if (gothour && !gotmin) {
-       agent.add('취침시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
-   } else if (gothour && !gothour) {
-       agent.add('취침시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
-   } else {
-       agent.add('취침시간을 입력해 주세요( 예시 - 6:26 21:40 ) ');
-   }
- }
+
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
