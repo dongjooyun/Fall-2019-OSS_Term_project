@@ -7,6 +7,7 @@ const config = {
 };
 
 const app = express();
+<<<<<<< HEAD
 app.post('/webhook', line.middleware(config), (req, res) => {
   Promise
     .all(req.body.events.map(handleEvent))
@@ -38,6 +39,8 @@ const config = {
 
 <<<<<<< HEAD
 const app = express();
+=======
+>>>>>>> 5c3493c34733e95cc8b593c61c6fbeefcc069682
 app.post('https://bots.dialogflow.com/line/d1584d25-0e52-48da-b6cc-20e021dc5e70/webhook', line.middleware(config), (req,res)=>{
   promise
     .all(req.body.events.map(handleEvent))
@@ -55,6 +58,7 @@ function handleEvent(event){
     text: event.message.text
   });
 }
+<<<<<<< HEAD
 =======
 
 // create LINE SDK client
@@ -305,6 +309,8 @@ console.log("A good night's sleep consists of 5-6 complete sleep cycles.");
 */
 
 >>>>>>> heroku
+=======
+>>>>>>> 5c3493c34733e95cc8b593c61c6fbeefcc069682
 
 app.listen(3000, function () {
   console.log('Linebot listening on port 3000!');
