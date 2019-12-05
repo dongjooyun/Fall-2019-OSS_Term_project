@@ -93,7 +93,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     } else {
         agent.add(`아래의 예시대로 채팅을 입력해 주세요 \n
 기상시간 입력 예시 :  기상 07:30 또는 기상 07시30분 \n
-취침시간 입력 예시 :  취침 22:30 또는 기상 22시30분 \n`);
+취침시간 입력 예시 :  취침 22:30 또는 취침 22시30분 \n`);
     }
   }
 
@@ -165,7 +165,7 @@ function mytime2(agent) {
     } else {
         agent.add(`아래의 예시대로 채팅을 입력해 주세요 \n
 기상시간 입력 예시 :  기상 07:30 또는 기상 07시30분 \n
-취침시간 입력 예시 :  취침 22:30 또는 기상 22시30분 \n`);
+취침시간 입력 예시 :  취침 22:30 또는 취침 22시30분 \n`);
     }
   }
 
